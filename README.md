@@ -23,6 +23,7 @@ About two weeks ago, the situation in the world was the following:
 <img src="img/BeforeUs.png">
 </p>
 Smart contracts development was not widely used because it requires special skills and learning Solidity.
+
 # Fantom RBVM Task
 
 The task was to develop Register-Based Virtual Machine and a translator from LLVM IR to its assembler.
@@ -133,7 +134,7 @@ or
    <instruction byte> <byte with value 1> <Constant:u64>
 ```
 
-## Fantom Smart Contract IDE
+# Fantom Smart Contract IDE
 
 UI of the IDE is the following:
 <p align="center">
@@ -161,7 +162,7 @@ We’ve created the entire infrastructure for LLVM IR translation and now it is 
 But LLVM IR is quite a huge project and it was not possible to add support for all the instructions during only one hackathon, so, support of Rust, Python, Go and others is coming soon.
 
 
-## Installation and Test Runners
+# Installation and Test Runners
 ### [1. Start Smart Contract IDE Using Docker](Launch-with-Docker)
 ### [2. Test Backend Manually](Launch-manually)
 ### Using Docker
