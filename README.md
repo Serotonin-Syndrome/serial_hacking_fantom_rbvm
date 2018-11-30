@@ -3,15 +3,16 @@
 </p>
 
 # Structure
-## [1) About](#About)
-## [2) Fantom RBVM Task](#Fantom-RBVM-Task)
-## [3) Solution](#Solution)
-#### [a) Translator from LLVM IR to RBVM](#Solution)
-#### [b) Fantom Smart Contract IDE](#Fantom-Smart-Contract-IDE)
-#### [c) Virtual Machine Specification](#Virtual-Machine-Specification)
-#### [d) Installation and Test Runners](#Installation-and-Test-Runners)
-## [4) Surprise](#Team)
-## [5) Team](#Team)
+## [1) About](About)
+## [2) Fantom RBVM Task](Fantom-RBVM-Task)
+## [3) Solution](Solution)
+#### [a) Translator from LLVM IR to RBVM](Solution)
+#### [b) Fantom Smart Contract IDE](Fantom-Smart-Contract-IDE)
+#### [c) Virtual Machine Specification](Virtual-Machine-Specification)
+#### [d) Installation and Test Runners](Installation-and-Test-Runners)
+## [4) Surprise](Surprise)
+## [5) Finally](Finally)
+## [6) Team](Team)
 
 # About
 We are team **Serotonin Syndrome** and we have solved the *Register-Based Virtual Machine* Fantom task on the Serial Hacking:November.
