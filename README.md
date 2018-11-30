@@ -163,9 +163,9 @@ But LLVM IR is quite a huge project and it was not possible to add support for a
 
 
 # Installation and Test Runners
-### [1. Start Smart Contract IDE Using Docker](launch-with-docker)
-### [2. Test Backend Manually](launch-manually)
-### Using Docker
+### [1. Start Smart Contract IDE Using Docker](#start-smart-contract-ide-using-docker)
+### [2. Test Backend Manually](test-backend-manually)
+### Start smart contract IDE Using Docker
 Start docker.
 Run this commands in Console/Terminal
 
@@ -178,7 +178,7 @@ docker run -p 80:8080 -d fantom-ide
 ```
 After that open `http://localhost:80` in your browser and you can see the our Smart Contract IDE
 
-### Manually
+### Test backend manually
 To launch and test our solution manually, follow this algorithm.
 
 #### Step 1: Download source code.
@@ -215,7 +215,7 @@ After that, you can find files LLVM IR files in `./*.ll` and the byte code for o
 ./compile-and-run examples/helloworld.c
 ```
 # Surprise
-During this hackathon we have researched a huge amount of information and what's interesting, we have  found, that the first task "Solidity to LLVM IR" is already solved by the official ethereum developers.
+During this hackathon we have gone through a huge amount of information and what's interesting, we have found that the first task "Solidity to LLVM IR" is already solved by the official ethereum developers.
 
 You can find its source code <a href="https://github.com/ewasm/design/issues/149"> here </a>.
 # Finally
@@ -223,14 +223,12 @@ You can find its source code <a href="https://github.com/ewasm/design/issues/149
 <img src="img/AllInfrastructure.png">
 </p>
 
-With only one hackathon:
-* we created completely working, RBVM-based infrastructure and Smart Contract IDE for developing in **any** language compilable to LLVM IR
-* backend of our solution requires more than 6000!!! lines of code in C++
-* we worked on more than two weeks without a break!
-* we solved **both** of the tasks and created a comprehensive ecosystem for developers
+During this hackathon:
+* we have created completely working RBVM-based infrastructure and Smart Contract IDE for development in **any** language compilable to LLVM IR
+* we have been working more than two weeks without a break!
+* we have solved **both** of the tasks and created a comprehensive ecosystem for developers
 
 # Team
-
 <p align="center">
 <img  src="img/Team.png">
 </p>
