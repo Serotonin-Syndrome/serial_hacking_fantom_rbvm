@@ -164,7 +164,7 @@ But LLVM IR is quite a huge project and it was not possible to add support for a
 
 # Installation and Test Runners
 ### [1. Start Smart Contract IDE Using Docker](#start-smart-contract-ide-using-docker)
-### [2. Test Backend Manually](test-backend-manually)
+### [2. Test Backend Manually](#test-backend-manually)
 ### Start smart contract IDE Using Docker
 Start docker.
 Run this commands in Console/Terminal
