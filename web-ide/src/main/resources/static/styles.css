@@ -160,7 +160,7 @@ body {
     max-height: 370px;
     overflow: auto;
 
-    font: 16px "Your favorite font",sans-serif;
+    font: 16px sans-serif;
 }
 
 #files ul li {
