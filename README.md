@@ -48,7 +48,7 @@ We created an infrastructure:
 to enable every developer in the world to write smart contracts in **any** language they want.
 We think it is an excellent result for a single hackathon.
 
-We’ve also created a <a href="http://209.97.131.179/#helloworld.c"> Smart Contract IDE.</a>
+We’ve also created a <a href="http://209.97.131.179/#contract.cpp"> Smart Contract IDE.</a>
 
 All the code is written in C++, we have also used `make` and Docker.
 
