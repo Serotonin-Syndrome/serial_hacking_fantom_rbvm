@@ -36,11 +36,11 @@ It will be the core of ultimate-speed decentralised projects for the nearest fut
 
 We created an infrastructure:
 
-* <a href="https://github.com/shdown/rbvm/blob/master/vm/RBVM.cpp"> Register-Based VM </a>  with <a href="https://github.com/shdown/rbvm/blob/master/vm/opcode.h">Opcodes</a>.
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/RBVM.cpp"> Register-Based VM </a>.
 
-* <a href="https://github.com/shdown/rbvm/tree/master/llvm-backend"> Translator from LLVM IR </a> (it is the most complex part of solution, about 3000 lines of code!!!)
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/tree/master/llvm-backend"> Translator from LLVM IR </a> (it is the most complex part of solution, about 3000 lines of code!!!)
 
-* <a href="https://github.com/shdown/rbvm/blob/master/vm/disassembler.cpp">Disassembler</a>
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/disassembler.cpp">Disassembler</a>
 
 to enable every developer in the world to write smart contracts in **any** language they want.
 We think it is an excellent result for a single hackathon.
@@ -51,7 +51,7 @@ All the code is written in C++, we have also used `make` and Docker.
 
 ### Virtual Machine Specification
 
-Simple scheme of our solution is below:
+Scheme of our solution is below:
 <p align="center">
     <img  src="img/Architecture.png">
 </p>
@@ -133,7 +133,7 @@ or
 
 ## Fantom Smart Contract IDE
 
-Simple scheme of our solution is below:
+UI of the IDE is the following:
 <p align="center">
     <img  src="img/SmartContractIDE.png">
 </p>
@@ -167,7 +167,7 @@ Start docker.
 Run this commands in Console/Terminal
 
 ```
-git clone https://github.com/shdown/rbvm && cd rbvm
+git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm && cd rbvm
 
 docker build -t fantom-ide .
 
@@ -185,7 +185,7 @@ To launch and test our solution manually, follow this algorithm.
 Open Terminal/Console and run:
 # ИЗМЕНИТЬ НА gitlab.com
 ```
-git clone https://github.com/shdown/rbvm && cd rbvm
+git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm && cd rbvm
 ```
 
 #### Step 2: Install LLVM 6 or 7.
@@ -216,7 +216,7 @@ After that, you can find files LLVM IR files in `./*.ll` and the byte code for o
 # Surprise
 During this hackathon we have researched a huge amount of information and what's interesting, we have  found, that the first task "Solidity to LLVM IR" is already solved by the official ethereum developers.
 
-You can find its source code <a href="https://github.com/ewasm/design/issues/149" target="_blank"> here </a>.
+You can find its source code <a href="https://github.com/ewasm/design/issues/149"> here </a>.
 
 # Team
 Finally:
