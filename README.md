@@ -15,7 +15,7 @@
 ## [6) Team](#team)
 
 # About
-We are team **Serotonin Syndrome** and we have solved the *Register-Based Virtual Machine* Fantom task on the Serial Hacking:November.
+We are team **Serotonin Syndrome** and we have solved the *Register-Based Virtual Machine* Fantom task on the Serial Hacking: November.
 
 About two weeks ago, the situation in the world was the following:
 
@@ -45,12 +45,12 @@ We created an infrastructure:
 
 * <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/disassembler.cpp">Disassembler</a>
 
-to enable every developer in the world to write smart contracts in **any** language they want.
+to empower every developer in the world to write smart contracts in **any** language they want.
 We think it is an excellent result for a single hackathon.
 
-We’ve also created a <a href="http://209.97.131.179/#contract.cpp"> Smart Contract IDE.</a>
+We’ve also created a <a href="http://209.97.131.179/#contract.cpp">Smart Contract IDE.</a>
 
-All the code is written in C++, we have also used `make` and Docker.
+All the code except web IDE is written in C++, we have also used `make` and Docker.
 
 ### Virtual Machine Specification
 
@@ -170,7 +170,8 @@ Start docker.
 Run this commands in Console/Terminal
 
 ```
-git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm && cd rbvm
+git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm
+cd serial_hacking_fantom_rbvm
 
 docker build -t fantom-ide .
 
