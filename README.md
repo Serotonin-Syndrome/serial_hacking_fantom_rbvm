@@ -141,7 +141,7 @@ UI of the IDE is the following:
     <img  src="img/SmartContractIDE.png">
 </p>
 
-We provide examples in this web backend, which allow develop, compile, test, and deploy smart contracts to the Register-Based Virtual Machine: <a href="http://209.97.131.179"> See Live Demo.</a>
+We provide examples in this web backend, which allow develop, compile, test, and deploy smart contracts to the Register-Based Virtual Machine: <a href="http://209.97.131.179/#contract.cpp"> See Live Demo.</a>
 
 
 
@@ -163,8 +163,8 @@ But LLVM IR is quite a huge project and it was not possible to add support for a
 
 
 # Installation and Test Runners
-### [1. Start Smart Contract IDE Using Docker](Launch-with-Docker)
-### [2. Test Backend Manually](Launch-manually)
+### [1. Start Smart Contract IDE Using Docker](launch-with-docker)
+### [2. Test Backend Manually](launch-manually)
 ### Using Docker
 Start docker.
 Run this commands in Console/Terminal
