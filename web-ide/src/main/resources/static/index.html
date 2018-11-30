@@ -1,0 +1,50 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" />
+	<link rel="stylesheet" href="styles.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+<div id="header">
+	<img src="fantom-logo-3.png">
+	<span>Smart contract IDE</span>
+	<div>
+		<a href="https://github.com/shdown/rbvm">Source code</a>
+        <a href="https://github.com/shdown/rbvm/tree/master/vm">What is RBVM</a>
+		<a href="https://fantom.foundation">Fantom Foundation</a>
+	</div>
+</div>
+<div id="global-container">
+	<div id="files">
+		<div class="interface-header">Files</div>
+		<ul></ul>
+		<div class="button create-button">Create file</div>
+	</div>
+	<div id="code">
+		<div class="interface-header">Code editor</div>
+		<div id="editor"></div>
+		<div class="horizontal-glue"></div>
+		<div id="console"></div>
+	</div>
+	<div class="vertical-glue"></div>
+	<div id="tools">
+		<div class="button compile-button">Compile for RBVM</div>
+        <div class="compiled-area"></div>
+        <div class="button test-button">Run code</div>
+        <div class="button deploy-button">Deploy to the Fantom Network</div>
+        <div class="contract-toolbox">
+            <div class="method-button" data-action="total-supply" data-args="0">totalSupply(<span></span>)</div>
+            <div class="method-button" data-action="balance-of" data-args="1">balanceOf(<span></span>)</div>
+            <div class="method-button" data-action="transfer" data-args="3">transfer(<span></span>)</div>
+        </div>
+	</div>
+</div>
+
+<script src="main.js"></script>
+</body>
+
+</html>

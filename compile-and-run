@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+opwd=$PWD
+
+set -e
+
+cd -- "$(dirname "$(readlink "$0" || echo "$0")")"
+
+die() {
+    printf >&2 '%s\n' "$@"
+    exit 1
+}
+
+if (( $# != 1 )); then
+    die "USAGE: $0 <source file>"
+fi
+
+select-binary() {
+    local arg
+    for arg; do
+        command -v "$arg" && return
+    done
+    die "Cannot find any of: $*"
+}
+
+src=$1
+case "$src" in
+*.c)
+    CLANG=$(select-binary clang clang-6 clang-7)
+    CLANG="$CLANG -std=c99"
+    ;;
+*.cpp|*.cxx)
+    CLANG=$(select-binary clang++ clang++-6 clang++-7)
+    CLANG="$CLANG -std=c++11"
+    ;;
+*)
+    die "Only .c and .cpp/.cxx files are supported."
+    ;;
+esac
+
+BACKEND=./llvm-backend/llvm-rbvm
+VM=./vm/vm
+if [[ ! -x $BACKEND ]] || [[ ! -x $VM ]]; then
+    make
+fi
+
+base=${src%.*}
+base=${base##*/}
+
+case "$src" in
+/*) abs_src=$src ;;
+*) abs_src="$opwd/$src" ;;
+esac
+
+set -x
+
+$CLANG $CPPFLAGS -S -emit-llvm -- "$abs_src"
+$BACKEND ./"$base".ll
+$VM ./"$base".rbvm

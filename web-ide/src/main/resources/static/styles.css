@@ -1,0 +1,292 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#global-container {
+    margin-top: 26px;
+    margin-bottom: 26px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 64px;
+}
+
+#header {
+    background-color: #091006;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 56px;
+    padding-right: 80px;
+
+    display: flex;
+    flex-direction: row;
+
+    min-width: 910px;
+}
+
+#header img {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 35px;
+}
+
+#header span {
+    flex-grow: 0;
+    flex-shrink: 0;
+    color: white;
+    display: block;
+    letter-spacing: 2px;
+
+    margin-top: 3px;
+    margin-left: 15px;
+    font: 400 23px lato,sans-serif;
+}
+
+#header div {
+    display: flex;
+    flex-direction: row-reverse;
+    /*align-items: flex-start;*/
+    /*justify-content: center;*/
+
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    margin: 0;
+    padding: 0;
+}
+
+#header div a {
+    flex-grow: 0;
+    flex-shrink: 0;
+    color: white;
+    display: block;
+
+    margin-top: 10px;
+    margin-left: 24px;
+    font: 300 17px lato, sans-serif;
+
+    text-decoration: none;
+
+    position: relative;
+}
+
+#header div a:after {
+    position: absolute;
+    content: '';
+
+    transition-property: width;
+    transition-timing-function: cubic-bezier(0, 0, 0.58, 1.0);
+    transition-duration: 300ms;
+
+    width: 0;
+    top: 0;
+    left: 0;
+    bottom: 2px;
+    border-bottom: 1px solid white;
+}
+
+#header div a:hover:after {
+    width: 100%;
+}
+
+.interface-header {
+    font: bold 18px sans-serif;
+    display: inline-block;
+    padding-bottom: 6px;
+    padding-left: 4px;
+    color: #4a4a4a;
+}
+
+#global-container .horizontal-glue {
+    height: 1px;
+    padding: 0;
+    background-color: #ddd;
+    z-index: 7;
+}
+
+#global-container .vertical-glue {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 1px;
+    padding: 0;
+    background-color: #ddd;
+    z-index: 7;
+}
+
+#files, #code, #tools {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 0;
+}
+
+#code {
+    margin-left: 38px;
+    flex-grow: 0.583;
+    flex-shrink: 1;
+    width: 0;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+#tools {
+    flex-grow: 0.26;
+    flex-shrink: 1;
+    width: 0;
+    margin-right: 0;
+}
+
+#files {
+    flex-grow: 0.157;
+    flex-shrink: 1;
+    width: 0;
+    margin-left: 0;
+}
+
+#files ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 12px;
+    padding: 0;
+    max-height: 370px;
+    overflow: auto;
+
+    font: 16px "Your favorite font",sans-serif;
+}
+
+#files ul li {
+    display: block;
+    color: #4a4a4a;
+    margin: 0;
+    padding-left: 7px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+#files ul li:last-child {
+    border-bottom: none;
+}
+
+#files ul li:hover {
+    background-color: #efefef;
+    cursor: pointer;
+}
+
+#files ul li.current {
+    box-shadow: inset 3px 0px 3px -2px grey;
+}
+
+#editor {
+    flex-grow: 2;
+    flex-shrink: 1;
+    height: 60%;
+    width: 100%;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+#console h4 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#console {
+    width: 100%;
+    height: 120px;
+    margin-top: 12px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: auto;
+    font: normal 14px Monaco,Consolas,"Courier New",monospace;
+}
+
+#console .console-stderr {
+    color: #c90000;
+}
+
+.button {
+    display: block;
+    border: 1px solid #091006;
+    color: #091006;
+    background-color: #efefef;
+    padding: 5px;
+    margin-bottom: 12px;
+    text-align: center;
+    font: bold 16px sans-serif;
+    letter-spacing: 1px;
+}
+
+.button:hover {
+    box-shadow: 1px 1px 7px grey;
+    cursor: pointer;
+}
+
+#tools .compiled-area {
+    margin-bottom: 12px;
+    padding: 4px;
+    font: 14px Monaco,Consolas,"Courier New",monospace;
+
+    overflow: auto;
+    height: 52%;
+}
+
+#console.unfilled:before {
+    color: #777777;
+    content: 'Output will appear here'
+}
+
+#tools .compiled-area.unfilled:before {
+    color: #777777;
+    content: 'Assembler will appear here';
+}
+
+#tools .method-button {
+    display: block;
+    color: #091006;
+    background-color: #efefef;
+    padding: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+    font: normal 14px sans-serif;
+}
+
+/*#tools .method-button {*/
+    /*display: block;*/
+    /*color: #4a4a4a;*/
+    /*margin: 0;*/
+    /*padding-left: 7px;*/
+    /*padding-right: 6px;*/
+    /*padding-top: 6px;*/
+    /*padding-bottom: 6px;*/
+    /*border-bottom: 1px solid #d4d4d4;*/
+/*}*/
+
+/*#tools .method-button:last-child {*/
+    /*border-bottom: none;*/
+/*}*/
+
+#tools .method-button:hover {
+    /*background-color: #f5f5f5;*/
+    box-shadow: 1px 1px 4px grey;
+    cursor: pointer;
+}
+
+#tools .method-button input {
+    cursor: default;
+    display: inline;
+    width: 60px;
+    border: none;
+    padding: 2px;
+    margin: 0;
+}

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd -- "$(dirname "$(readlink "$0" || echo "$0")")"
+
+make
+
+CPPFLAGS=-DJUDGE
+
+run-on-files() {
+    local file compiler=$1
+    shift
+    for file; do
+        echo >&2 "Running test: $file"
+        $compiler $CPPFLAGS "$file"
+        expected=$(./a.out)
+        found=$(CPPFLAGS=$CPPFLAGS ./compile-and-run "$file")
+        if [[ "$expected" != "$found" ]]; then
+            echo >&2 "FAIL"
+            exit 1
+        fi
+    done
+}
+
+shopt -s nullglob
+run-on-files cc examples/*.c
+run-on-files c++ examples/*.cpp
+
+rm -f ./a.out
+
+echo >&2 "ALL TESTS PASSED"
+exit 0

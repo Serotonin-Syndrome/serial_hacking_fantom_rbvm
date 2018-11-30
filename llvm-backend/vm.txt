@@ -1,0 +1,73 @@
+Each stack frame has its own set of 256 registers.
+
+<u64> = uint64_t.
+<Reg> = uint8_t.
+<string> = <length:u32> <char>...
+
+<Program> = <Instr>...
+
+<Instr> = fd <Name:string> <nargs:u64> <nskip:n64>  # function definition
+        | mov <Reg> <Val>
+        | ineg <Reg>
+        | iadd <Reg> <Val>
+        | add <Reg> <Val>
+        | sub <Reg> <Val>
+        | mul <Reg> <Val>
+        | urem <Reg> <Val>
+        | srem <Reg> <Val>
+        | udiv <Reg> <Val>
+        | sdiv <Reg> <Val>
+        | and <Reg> <Val>
+        | or <Reg> <Val>
+        | xor <Reg> <Val>
+        | shl <Reg> <Val>
+        | lshr <Reg> <Val>
+        | ashr <Reg> <Val>
+        | fadd <Reg> <Val>
+        | fsub <Reg> <Val>
+        | fmul <Reg> <Val>
+        | frem <Reg> <Val>
+        | fdiv <Reg> <Val>
+        | eq <Reg> <Val>           # == bitwise
+        | ne <Reg> <Val>           # != bitwise
+        | slt <Reg> <Val>          # <  as signed integers
+        | sle <Reg> <Val>          # <= as signed integers
+        | sgt <Reg> <Val>          # >  as signed integers
+        | sge <Reg> <Val>          # >= as signed integers
+        | ult <Reg> <Val>          # <  as unsigned integers
+        | ule <Reg> <Val>          # <= as unsigned integers
+        | ugt <Reg> <Val>          # >  as unsigned integers
+        | uge <Reg> <Val>          # >= as unsigned integers
+        | ld8 <Reg> <Val>          # <Reg> = *(uint8_t *)<Val>
+        | ld16 <Reg> <Val>         # <Reg> = *(uint16_t *)<Val>
+        | ld32 <Reg> <Val>         # <Reg> = *(uint32_t *)<Val>
+        | ld64 <Reg> <Val>         # <Reg> = *(uint64_t *)<Val>
+        | st8 <Val> <Reg>          # *(uint8_t *)<Val> = <Reg>
+        | st16 <Val> <Reg>         # *(uint16_t *)<Val> = <Reg>
+        | st32 <Val> <Reg>         # *(uint32_t *)<Val> = <Reg>
+        | st64 <Val> <Reg>         # *(uint64_t *)<Val> = <Reg>
+        | jmp <Off>                # unconditional relative jump
+        | jz <Reg> <Off>           # relative jump if <Reg> == 0
+        | lea <Reg1> <Reg2>        # <Reg1> = &<Reg2> (load effective address)
+        | leave                    # leave function returning nothing
+        | ret <Val>                # return <Val> from function
+        | gg <Name:string> <Reg>   # get global
+        | sg <Name:string> <Reg>   # set global
+        | css <string> <Reg>       # create static string; write pointer to <Reg>
+        | css_dyn <Reg1> <Reg2>    # create static string of length 8 and put <Reg2> into it
+        | call0 <Reg>
+        | call1 <Reg> <Reg1>
+        | call2 <Reg> <Reg1> <Reg2>
+        | call3 <Reg> <Reg1> <Reg2> <Reg3>
+        | call4 <Reg> <Reg1> <Reg2> <Reg3> <Reg4>
+        | call5 <Reg> <Reg1> <Reg2> <Reg3> <Reg4> <Reg5>
+        | call6 <Reg> <Reg1> <Reg2> <Reg3> <Reg4> <Reg5> <Reg6>
+        | call7 <Reg> <Reg1> <Reg2> <Reg3> <Reg4> <Reg5> <Reg6> <Reg7>
+        | call8 <Reg> <Reg1> <Reg2> <Reg3> <Reg4> <Reg5> <Reg6> <Reg7> <Reg8>
+
+call<N> functions put the return value into the function register (<Reg>).
+
+Instructions that may take either a register or constant operand (<Val>) are encoded as follows:
+    <instruction byte> <byte with value 0> <Reg>
+or
+    <instruction byte> <byte with value 1> <Constant:u64>
