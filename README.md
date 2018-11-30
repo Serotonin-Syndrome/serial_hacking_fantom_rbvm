@@ -1,14 +1,15 @@
 <p align="center">
-<img width="80%" src="img/AboutUs.png">
+<img src="img/AboutUs.png">
 </p>
 
 # Structure
 ## [1) About](#About)
 ## [2) Fantom RBVM Task](#Fantom-RBVM-Task)
 ## [3) Solution](#Solution)
-#### [a) Virtual Machine Specification](#Virtual-Machine-Specification)
+#### [a) Translator from LLVM IR to RBVM](#Solution)
 #### [b) Fantom Smart Contract IDE](#Fantom-Smart-Contract-IDE)
-#### [c) Installation and Test Runners](#Installation-and-Test-Runners)
+#### [c) Virtual Machine Specification](#Virtual-Machine-Specification)
+#### [d) Installation and Test Runners](#Installation-and-Test-Runners)
 ## [4) Surprise](#Team)
 ## [5) Team](#Team)
 
@@ -18,9 +19,9 @@ We are team **Serotonin Syndrome** and we have solved the *Register-Based Virtua
 About two weeks ago, the situation in the world was the following:
 
 <p align="center">
-<img width="80%" src="img/BeforeUs.png">
+<img src="img/BeforeUs.png">
 </p>
-
+Smart contracts development was not widely used because it requires special skills and learning Solidity.
 # Fantom RBVM Task
 
 The task was to develop Register-Based Virtual Machine and a translator from LLVM IR to its assembler.
@@ -181,9 +182,7 @@ To launch and test our solution manually, follow this algorithm.
 #### Step 1: Download source code.
 (if you don't have git, install it <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git"> that </a> way)
 
-
 Open Terminal/Console and run:
-# ИЗМЕНИТЬ НА gitlab.com
 ```
 git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm && cd rbvm
 ```
@@ -217,13 +216,18 @@ After that, you can find files LLVM IR files in `./*.ll` and the byte code for o
 During this hackathon we have researched a huge amount of information and what's interesting, we have  found, that the first task "Solidity to LLVM IR" is already solved by the official ethereum developers.
 
 You can find its source code <a href="https://github.com/ewasm/design/issues/149"> here </a>.
+# Finally
+<p align="center">
+<img src="img/AllInfrastructure.png">
+</p>
 
-# Team
-Finally:
-* we created completelly working, RBVM-based infrastructure and Smart Contract IDE for developing in **any** language compilable to LLVM IR
+With only one hackathon:
+* we created completely working, RBVM-based infrastructure and Smart Contract IDE for developing in **any** language compilable to LLVM IR
 * backend of our solution requires more than 6000!!! lines of code in C++
 * we worked on more than two weeks without a break!
+* we solved **both** of the tasks and created a comprehensive ecosystem for developers
 
+# Team
 
 <p align="center">
 <img  src="img/Team.png">
