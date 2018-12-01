@@ -32,9 +32,9 @@ int main() {
                 continue;
             }
             if (mt->transfer(from, to, amount)) {
-                printf("transfer(%lu, %lu, %lu): OK", from, to, amount);
+                printf("transfer(%lu, %lu, %lu): OK\n", from, to, amount);
             } else {
-                printf("transfer(%lu, %lu, %lu): FAILED", from, to, amount);
+                printf("transfer(%lu, %lu, %lu): FAILED\n", from, to, amount);
             }
         } else {
             puts("Command was not understood.");
