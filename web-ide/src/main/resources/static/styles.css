@@ -258,7 +258,7 @@ body {
     padding: 5px;
     margin-bottom: 5px;
     text-align: left;
-    font: normal 14px sans-serif;
+    font: normal 14px Monaco,Consolas,"Courier New",monospace;
 }
 
 /*#tools .method-button {*/

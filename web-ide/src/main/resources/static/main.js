@@ -17,6 +17,67 @@ highlight_formats = {
     'c': "ace/mode/c_cpp"
 };
 
+const InterfaceConsole = (function () {
+    let console = $('#console');
+    let _data = [];
+
+    function textify(text, jqElement) {
+        jqElement.text(text);
+        let html = jqElement.html();
+        jqElement.html(html.replace(/\r?\n/g, '<br/>'));
+    }
+
+    function _displayOutput() {
+        let data = _data;
+        console.children().remove();
+
+        if (data.length === 0) {
+            console.addClass('unfilled');
+        } else {
+            console.removeClass('unfilled');
+            data.forEach(function (execData) {
+                let title = execData.title;
+                let stdout = execData.stdout;
+                let stderr = execData.stderr;
+
+                if (title && (stdout || stderr)) {
+                    console.append($('<h4 />').html(title));
+                }
+                if (stdout) {
+                    console.append(textify(stdout, $('<div class="console-stdout" />')));
+                }
+                if (stderr) {
+                    console.append(textify(stderr, $('<div class="console-stderr" />')));
+                }
+            });
+        }
+    }
+
+    let exportInterface = {
+        appendData: function (data) {
+            if (!data.forEach)
+                data = [data];
+
+            for (let i = 0; i < data.length; i++)
+                _data.push(data[i]);
+
+            _displayOutput();
+
+            return this;
+        },
+        setData: function (data) {
+            return this.clear().appendData(data);
+        },
+        clear: function () {
+            _data = [];
+            _displayOutput();
+            return this;
+        }
+    };
+
+    exportInterface.clear();
+    return exportInterface;
+})();
 
 class File {
     constructor(name) {
@@ -129,7 +190,7 @@ start_files_data = {
     },
     "eratosthenes_sieve.c": {
         "code": "/*\n    Eratosthenes sieve -- method of finding the prime numbers.\n    \n    This example shows loops and conditions work correctly.\n*/\n\n\n#include <stdio.h>\n#include <stdlib.h>\ntypedef unsigned long UL;\n\nint main() {\n#ifdef JUDGE\n    UL n = 10000;\n#else\n    UL n;\n    scanf(\"%lu\", &n);\n#endif\n\n    char *p = malloc(n + 1);\n    if (!p) {\n        puts(\"Out of memory.\");\n        return 1;\n    }\n    p[0] = p[1] = 0;\n    for (UL i = 2; i <= n; ++i) {\n        p[i] = 1;\n    }\n    for (UL i = 2; i <= n; ++i) {\n        if (p[i]) {\n            if (i * i <= n) {\n                for (UL j = i * i; j <= n; j += i) {\n                    p[j] = 0;\n                }\n            }\n            printf(\"%lu\\n\", i);\n        }\n    }\n}\n"
-    },    
+    },
     "brainfuck.cpp": {
         "code": "/*\n    A Brainfuck interpreter.\n\n    More complex example showing loops, conditions and switches work correctly.\n*/\n\n\n#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nstatic\nvoid *\nxmalloc(size_t n)\n{\n    void *p = malloc(n);\n    if (n && !p) {\n        puts(\"Out of memory.\");\n        exit(1);\n    }\n    return p;\n}\n\nstatic\nconst char *\njump(const char *p, bool forward)\n{\n    int balance = 0;\n    do {\n        switch (*p) {\n        case '[': ++balance; break;\n        case ']': --balance; break;\n        }\n        if (forward) {\n            ++p;\n        } else {\n            --p;\n        }\n    } while (balance != 0);\n    return p;\n}\n\nint main() {\n#ifdef JUDGE\n    // prints out \"Hello World!\"\n    const char *prog = \"++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.\";\n#else\n    char *buf = (char *) xmalloc(1024);\n    scanf(\"%1023s\", buf);\n    const char *prog = buf;\n#endif\n\n    const size_t NMEM = 30000;\n    char *p = (char *) xmalloc(NMEM);\n    for (size_t i = 0; i < NMEM; ++i) {\n        p[i] = 0;\n    }\n\n    for (; *prog; ++prog) {\n        switch (*prog) {\n            case '>':\n                ++p;\n                break;\n            case '<':\n                --p;\n                break;\n            case '+':\n                ++*p;\n                break;\n            case '-':\n                --*p;\n                break;\n            case '.':\n                printf(\"%c\", *p);\n                break;\n            case ',':\n                scanf(\"%c\", p);\n                break;\n            case '[':\n                if (!*p) {\n                    prog = jump(prog, true);\n                    --prog;\n                }\n                break;\n                break;\n            case ']':\n                prog = jump(prog, false);\n                break;\n        }\n    }\n}\n"
     },
@@ -192,51 +253,17 @@ function updateFilesList() {
 function displayCompiled(text, isSmartContract) {
     let area = $('.compiled-area');
     if (text == null) {
-        // $('.compiled-area-container').hide();
         area.html("");
         area.addClass('unfilled');
 
         $('.deploy-button, .test-button').fadeOut();
     } else {
-        // $('.compiled-area-container').show();
-        // $('.compiled-area').text(text);
-        // text = $('.compiled-area').html();
         area.html(text.replace(/\r?\n/g, '<br/>'));
         area.removeClass('unfilled');
 
         $('.deploy-button, .test-button').fadeIn();
     }
 }
-
-function displayOutput(data) {
-    let console = $('#console');
-    console.children().remove();
-    if (!data || data.forEach && data.length === 0) {
-        console.addClass('unfilled');
-    } else {
-        if (!data.forEach)
-            data = [data];
-
-        console.removeClass('unfilled');
-        data.forEach(function (execData) {
-            let title = execData.title || null;
-            let stdout = execData.stdout || null;
-            let stderr = execData.stderr || null;
-
-            if (title && (stdout || stderr)) {
-                console.append($('<h4 />').html(title));
-            }
-            if (stdout) {
-                console.append($('<div class="console-stdout" />').html(stdout.replace(/\r?\n/g, '<br/>')));
-            }
-            if (stderr) {
-                console.append($('<div class="console-stderr" />').html(stderr.replace(/\r?\n/g, '<br/>')));
-            }
-        });
-    }
-}
-
-displayOutput();
 
 function fileSelected(name) {
     selectedFile = name;
@@ -280,11 +307,11 @@ function displayCompilationWaste(compilationResponse) {
                 stderr: compilationResponse.translatorExecution.stderr
             });
     }
-    displayOutput(data);
+    InterfaceConsole.setData(data);
 }
 
 function compileCurrentFile() {
-    displayOutput(null);
+    InterfaceConsole.clear();
     displayCompiled(null);
     var file = new File(selectedFile);
     file.maintainId = null;
@@ -318,7 +345,7 @@ function runBytecodeInOneShotMode(bytecode) {
     }).done(function (result) {
         if (result) {
             console.log(result);
-            displayOutput(result);
+            InterfaceConsole.setData(result);
         }
     });
 }
@@ -341,7 +368,7 @@ function runBytecode(file) {
     if (!bytecode)
         return;
 
-    displayOutput(null);
+    InterfaceConsole.clear();
 
     if (file.isSmartContract) {
         runBytecodeInMaintainMode(bytecode, file);
@@ -362,7 +389,7 @@ function callSmartMethod(action, attrs) {
         method: "POST"
     }).done(function (result) {
         console.log(result);
-        displayOutput(result);
+        InterfaceConsole.appendData(result);
     });
 }
 
@@ -403,6 +430,7 @@ function selectFileAccordingToLocationHash() {
         location.hash = "#" + selectedFile;
     }
 }
+
 
 $('.compile-button').on('click', function () {
     if (selectedFile) {
@@ -455,53 +483,61 @@ $(window).on('hashchange', function () {
     selectFileAccordingToLocationHash();
 });
 
-$('.contract-toolbox .method-button').on('click', function (ev) {
-    if (!$(ev.target).hasClass('method-button'))
-        return;
 
-    let action = ev.target.dataset.action;
-    let numArgs = parseInt(ev.target.dataset.args);
-    let attrs = new Array(numArgs);
-    for (let i = 0; i < numArgs; i++) {
-        attrs[i] = $(ev.target).find("input[data-index='" + i + "']").val();
-        if (attrs[i] === "") {
-            swal({
-                title: 'Fill all arguments',
-                icon: 'warning'
-            });
-            return;
-        }
+(function INIT_CONTRACT_TOOLBOX() {
+    function getArgNames(element) {
+        let attrs = element.dataset.args;
+        if (!attrs)
+            return 0;
+        return attrs.split('|');
     }
-    console.log(attrs);
-    callSmartMethod(action, attrs);
-});
-$('.contract-toolbox .method-button').each(function () {
-    let self = this;
-    $(self).on('keypress', function (ev) {
-        if (ev.which == 13) {
-            $(self).click();
+
+    $('.contract-toolbox .method-button').on('click', function (ev) {
+        if (!$(ev.target).hasClass('method-button'))
+            return;
+
+        let action = ev.target.dataset.action;
+        let numArgs = getArgNames(ev.target).length;
+        let attrs = new Array(numArgs);
+        for (let i = 0; i < numArgs; i++) {
+            attrs[i] = $(ev.target).find("input[data-index='" + i + "']").val();
+            if (attrs[i] === "") {
+                swal({
+                    title: 'Fill all arguments',
+                    icon: 'warning'
+                });
+                return;
+            }
+        }
+        console.log(attrs);
+        callSmartMethod(action, attrs);
+    });
+
+    $('.contract-toolbox .method-button').each(function () {
+        let self = this;
+        $(self).on('keypress', function (ev) {
+            if (ev.which == 13) {
+                $(self).click();
+            }
+        });
+    });
+
+    $('.contract-toolbox .method-button').each(function () {
+        let argNames = getArgNames(this);
+        for (let i = 0; i < argNames.length; i++) {
+            $(this).children('span')
+                .append($('<input type="text" data-index="' + i + '" placeholder="' + argNames[i] + '"/>'));
+            if (i != numArgs - 1) {
+                $(this).children('span').append($('<span>, </span>'));
+            }
         }
     });
-});
+})();
+
 
 selectFileAccordingToLocationHash();
 if (!selectedFile) {
     fileSelected(File.getFileNames()[0]);
 }
 
-
-// TODO make it in human style
-// Костыль:
-placeholders = ['address', 'address', 'amount'];
-
-$('.contract-toolbox .method-button').each(function () {
-    let numArgs = parseInt(this.dataset.args);
-    for (let i = 0; i < numArgs; i++) {
-        $(this).children('span')
-            .append($('<input type="text" data-index="' + i + '" placeholder="' + placeholders[i] + '"/>'));
-        if (i != numArgs - 1) {
-            $(this).children('span').append($('<span>, </span>'));
-        }
-    }
-});
 // TODO think about reactive architecture
