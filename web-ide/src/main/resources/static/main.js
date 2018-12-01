@@ -527,7 +527,7 @@ $(window).on('hashchange', function () {
         for (let i = 0; i < argNames.length; i++) {
             $(this).children('span')
                 .append($('<input type="text" data-index="' + i + '" placeholder="' + argNames[i] + '"/>'));
-            if (i != numArgs - 1) {
+            if (i != argNames.length - 1) {
                 $(this).children('span').append($('<span>, </span>'));
             }
         }
