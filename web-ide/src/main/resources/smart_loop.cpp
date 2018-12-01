@@ -9,6 +9,7 @@ static bool eq_str(const char *a, const char *b) {
 
 int main() {
     MyToken *mt = create<MyToken>(123, 1000000000);
+    printf("Smart contract initialization succeeded. Initiator address: %lu, total value: %lu\n", 123ULL, 1000000000ULL);
     // Possible commands:
     //     total-supply
     //     balance-of <address>

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import raid.hack.crypto.fantom.response.ExecutionResponse;
+import raid.hack.crypto.fantom.response.MaintainExecutionResponse;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -25,10 +26,13 @@ public class RunCodeAPI {
   }
 
   @PostMapping("/api/run-maintain")
-  public String runInMaintainMode(@RequestParam(value = "bytecode") String code) {
+  public MaintainExecutionResponse runInMaintainMode(@RequestParam(value = "bytecode") String code) {
     String id = CoderHelper.nextIdentifier();
     writeFile(id, code);
-    return ExecutionHolder.instance.run("stdbuf", "-oL", RBVM_PATH, id);
+    String maintainId = ExecutionHolder.instance.run("stdbuf", "-oL", RBVM_PATH, id);
+    ExecutionController controller = ExecutionHolder.instance.get(maintainId);
+    String initOut = controller.openInput().nextLine();
+    return new MaintainExecutionResponse(maintainId, new ExecutionResponse(initOut, null));
   }
 
   @PostMapping("/api/communicate-maintain")

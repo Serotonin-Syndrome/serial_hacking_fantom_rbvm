@@ -1,4 +1,4 @@
-const CLIENT_COMPATIBILITY = "0.1.10"
+const CLIENT_COMPATIBILITY = "0.1.11"
 
 const LAST_COMPATIBILITY = localStorage.getItem("client_compatibility")
 if (CLIENT_COMPATIBILITY != LAST_COMPATIBILITY) {
@@ -361,8 +361,9 @@ function runBytecodeInMaintainMode(bytecode, file) {
         method: "POST"
     }).done(function (result) {
         console.log(result);
-        file.maintainId = result;
+        file.maintainId = result.maintainId;
         fileSelected(selectedFile);
+        InterfaceConsole.setData(result.executionResponse);
     });
 }
 
