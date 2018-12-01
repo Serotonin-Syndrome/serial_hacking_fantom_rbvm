@@ -18,36 +18,37 @@ highlight_formats = {
 };
 
 const InterfaceConsole = (function () {
-    let console = $('#console');
+    let _console = $('#console');
     let _data = [];
 
-    function textify(text, jqElement) {
+    function _textify(text, jqElement) {
         jqElement.text(text);
         let html = jqElement.html();
         jqElement.html(html.replace(/\r?\n/g, '<br/>'));
+        return jqElement;
     }
 
     function _displayOutput() {
         let data = _data;
-        console.children().remove();
+        _console.children().remove();
 
         if (data.length === 0) {
-            console.addClass('unfilled');
+            _console.addClass('unfilled');
         } else {
-            console.removeClass('unfilled');
+            _console.removeClass('unfilled');
             data.forEach(function (execData) {
                 let title = execData.title;
                 let stdout = execData.stdout;
                 let stderr = execData.stderr;
 
                 if (title && (stdout || stderr)) {
-                    console.append($('<h4 />').html(title));
+                    _console.append($('<h4 />').html(title));
                 }
                 if (stdout) {
-                    console.append(textify(stdout, $('<div class="console-stdout" />')));
+                    _console.append(_textify(stdout, $('<div class="console-stdout" />')));
                 }
                 if (stderr) {
-                    console.append(textify(stderr, $('<div class="console-stderr" />')));
+                    _console.append(_textify(stderr, $('<div class="console-stderr" />')));
                 }
             });
         }
@@ -55,6 +56,8 @@ const InterfaceConsole = (function () {
 
     let exportInterface = {
         appendData: function (data) {
+            if (!data)
+                return;
             if (!data.forEach)
                 data = [data];
 
