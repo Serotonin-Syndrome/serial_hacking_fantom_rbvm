@@ -17,9 +17,12 @@ highlight_formats = {
     'c': "ace/mode/c_cpp"
 };
 
+selectedFile = null;
+
 const InterfaceConsole = (function () {
     let _console = $('#console');
     let _data = [];
+    let _lastFile = null;
 
     function _textify(text, jqElement) {
         jqElement.text(text);
@@ -61,6 +64,11 @@ const InterfaceConsole = (function () {
             if (!data.forEach)
                 data = [data];
 
+            if (_lastFile != selectedFile) {
+                _lastFile = selectedFile;
+                _data = [];
+            }
+
             for (let i = 0; i < data.length; i++)
                 _data.push(data[i]);
 
@@ -72,6 +80,7 @@ const InterfaceConsole = (function () {
             return this.clear().appendData(data);
         },
         clear: function () {
+            _lastFile = null;
             _data = [];
             _displayOutput();
             return this;
@@ -231,8 +240,6 @@ if (File.getFileNames().length == 0) {
 File.getFiles().forEach(function (f) {
     f.maintainId = null;
 });
-
-selectedFile = null
 
 
 function updateFilesList() {
@@ -394,6 +401,10 @@ function callSmartMethod(action, attrs) {
     }).done(function (result) {
         console.log(result);
         InterfaceConsole.appendData(result);
+        if (result.stderr) {
+            file.maintainId = null;
+            fileSelected(file.name);
+        }
     });
 }
 
