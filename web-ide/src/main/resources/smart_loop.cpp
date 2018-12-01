@@ -17,14 +17,14 @@ int main() {
     char *buf = alloc_for<char>(1024);
     while (scanf("%1023s", buf) == 1) {
         if (eq_str(buf, "total-supply")) {
-            printf("%lu\n", static_cast<unsigned long>(mt->totalSupply()));
+            printf("totalSupply(): %lu\n", static_cast<unsigned long>(mt->totalSupply()));
         } else if (eq_str(buf, "balance-of")) {
             unsigned long who;
             if (scanf("%lu", &who) != 1) {
                 puts("Cannot read number!");
                 continue;
             }
-            printf("%lu\n", static_cast<unsigned long>(mt->balanceOf(who)));
+            printf("balanceOf(%lu): %lu\n", who, static_cast<unsigned long>(mt->balanceOf(who)));
         } else if (eq_str(buf, "transfer")) {
             unsigned long from, to, amount;
             if (scanf("%lu%lu%lu", &from, &to, &amount) != 3) {
@@ -32,9 +32,9 @@ int main() {
                 continue;
             }
             if (mt->transfer(from, to, amount)) {
-                puts("OK");
+                printf("transfer(%lu, %lu, %lu): OK", from, to, amount);
             } else {
-                puts("Transfer failed!");
+                printf("transfer(%lu, %lu, %lu): FAILED", from, to, amount);
             }
         } else {
             puts("Command was not understood.");
