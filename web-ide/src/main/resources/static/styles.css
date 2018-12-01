@@ -283,7 +283,7 @@ body {
 }
 
 #tools .method-button input {
-    cursor: default;
+    cursor: text;
     display: inline;
     width: 54px;
     border: none;
