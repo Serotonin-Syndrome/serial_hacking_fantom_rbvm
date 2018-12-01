@@ -1,4 +1,4 @@
-const CLIENT_COMPATIBILITY = "0.1.11"
+const CLIENT_COMPATIBILITY = "0.1.12"
 
 const LAST_COMPATIBILITY = localStorage.getItem("client_compatibility")
 if (CLIENT_COMPATIBILITY != LAST_COMPATIBILITY) {
@@ -255,7 +255,10 @@ function updateFilesList() {
         ul.append(listElement);
 
         listElement.on('click', function () {
+            let doClearSelection = (filename != selectedFile);
             fileSelected(filename);
+            if (doClearSelection)
+                editor.session.getSelection().clearSelection();
         });
     });
 }
