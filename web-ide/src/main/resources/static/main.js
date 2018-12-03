@@ -11,10 +11,11 @@ var editor = ace.edit("editor");
 editor.setTheme("ace/theme/eclipse");
 editor.session.setMode("ace/mode/c_cpp");
 
-
+ace.config.setModuleUrl("ace/mode/solidity", "ace-mode-solidity.js");
 highlight_formats = {
     'cpp': "ace/mode/c_cpp",
-    'c': "ace/mode/c_cpp"
+    'c': "ace/mode/c_cpp",
+    'sol': "ace/mode/solidity"
 };
 
 selectedFile = null;
@@ -425,7 +426,7 @@ function tryCreateFile(name) {
             file.delete();
             swal({
                 title: 'Wrong file extension',
-                text: 'Only .c and .cpp formats are supported.',
+                text: 'Only .c, .cpp and .sol formats are supported.',
                 icon: 'warning'
             });
         } else {
