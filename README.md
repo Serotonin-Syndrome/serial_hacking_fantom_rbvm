@@ -14,6 +14,24 @@
 ## [5) Finally](#finally)
 ## [6) Team](#team)
 
+
+# Structure
+
+<ol type="1" style="font-size: x-large;">
+<li> [About](#about)
+<li> [Fantom RBVM Task](#fantom-rbvm-task)
+<li> [Solution](#solution)
+<ol type="a" style="font-size: large;">
+  <li> [Translator from LLVM IR to RBVM](#solution)
+  <li> [Fantom Smart Contract IDE](#fantom-smart-contract-ide)
+  <li> [Virtual Machine Specification](#virtual-machine-specification)
+  <li> [Installation and Test Runners](#installation-and-test-runners)
+</ol>
+<li> [Surprise](#surprise)
+<li> [Finally](#finally)
+<li> [Team](#team)
+</ol>
+
 # About
 We are team **Serotonin Syndrome** and we have solved the *Register-Based Virtual Machine* Fantom task on the Serial Hacking: November.
 
@@ -22,6 +40,7 @@ About two weeks ago, the situation in the world was the following:
 <p align="center">
 <img src="img/BeforeUs.png">
 </p>
+
 Smart contracts development was not widely used because it requires special skills and learning Solidity.
 
 # Fantom RBVM Task
@@ -37,20 +56,23 @@ It will be the core of ultimate-speed decentralised projects for the nearest fut
 <img src="img/AfterUs.png">
 </p>
 
-We created an infrastructure:
+We created the infrastructure:
 
-* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/RBVM.cpp"> Register-Based VM </a>.
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/RBVM.cpp"> Register-Based VM</a>;
 
-* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/tree/master/llvm-backend"> Translator from LLVM IR </a> (it is the most complex part of solution, about 3000 lines of code!!!)
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/tree/master/llvm-backend"> Translator from LLVM IR </a> (the most complex part of our solution);
 
-* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/disassembler.cpp">Disassembler</a>
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/disassembler.cpp">Disassembler</a>;
 
 to empower every developer in the world to write smart contracts in **any** language they want.
 We think it is an excellent result for a single hackathon.
 
-We’ve also created a <a href="http://209.97.131.179/#contract.cpp">Smart Contract IDE.</a>
+We covered all backend above into the User-Friendly interface:
+* <a href="http://209.97.131.179/#contract.cpp">Smart Contract IDE: Demo</a>;
 
-All the code except web IDE is written in C++, we have also used `make` and Docker.
+
+
+All the code except web IDE is written in C++, we have also used `make` and Docker. We use Bash for automatisation and test runners. All the documentation you can find below and in Installing section.
 
 ### Virtual Machine Specification
 
@@ -136,7 +158,7 @@ or
 
 # Fantom Smart Contract IDE
 
-UI of the IDE is the following:
+We have created a very simple, comfortable and User-friendly interface for developers.
 <p align="center">
     <img  src="img/SmartContractIDE.png">
 </p>
@@ -171,13 +193,14 @@ Run this commands in Console/Terminal
 
 ```
 git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm
+
 cd serial_hacking_fantom_rbvm
 
 docker build -t fantom-ide .
 
 docker run -p 80:8080 -d fantom-ide
 ```
-After that open `http://localhost:80` in your browser and you can see the our Smart Contract IDE
+After that open `http://localhost:80` in your browser and you can see our Smart Contract IDE
 
 ### Test backend manually
 To launch and test our solution manually, follow this algorithm.
@@ -187,7 +210,9 @@ To launch and test our solution manually, follow this algorithm.
 
 Open Terminal/Console and run:
 ```
-git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm && cd rbvm
+git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm
+
+cd serial_hacking_fantom_rbvm
 ```
 
 #### Step 2: Install LLVM 6 or 7.
