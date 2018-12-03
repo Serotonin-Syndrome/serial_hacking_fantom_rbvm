@@ -2,18 +2,6 @@
 <img src="img/AboutUs.png">
 </p>
 
-# Structure
-## [1) About](#about)
-## [2) Fantom RBVM Task](#fantom-rbvm-task)
-## [3) Solution](#solution)
-#### [a) Translator from LLVM IR to RBVM](#solution)
-#### [b) Fantom Smart Contract IDE](#fantom-smart-contract-ide)
-#### [c) Virtual Machine Specification](#virtual-machine-specification)
-#### [d) Installation and Test Runners](#installation-and-test-runners)
-## [4) Surprise](#surprise)
-## [5) Finally](#finally)
-## [6) Team](#team)
-
 
 # Structure
 
