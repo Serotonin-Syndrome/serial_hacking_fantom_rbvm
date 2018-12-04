@@ -1,4 +1,4 @@
-const CLIENT_COMPATIBILITY = "0.1.12"
+const CLIENT_COMPATIBILITY = "0.1.13";
 
 const LAST_COMPATIBILITY = localStorage.getItem("client_compatibility")
 if (CLIENT_COMPATIBILITY != LAST_COMPATIBILITY) {
@@ -226,7 +226,8 @@ start_files_data = {
     }
 };
 
-if (File.getFileNames().length == 0) {
+const THIS_USER_IS_NEW = (File.getFileNames().length == 0);
+if (THIS_USER_IS_NEW) {
     for (filename in start_files_data) {
         if (!start_files_data.hasOwnProperty(filename)) {
             continue;
