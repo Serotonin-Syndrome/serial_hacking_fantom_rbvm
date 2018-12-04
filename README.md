@@ -29,11 +29,11 @@ About two weeks ago, the situation in the world was the following:
 <img src="img/BeforeUs.png">
 </p>
 
-Smart contracts development was not widely used because it requires special skills and learning Solidity.
+Smart contracts development was not widespread because it required special skills and the knowledge of Solidity.
 
 # Fantom RBVM Task
 
-The task was to develop Register-Based Virtual Machine and a translator from LLVM IR to its assembler.
+The task was to develop Register-Based Virtual Machine and a translator from LLVM IR to its bytecode.
 
 # Solution
 
@@ -44,23 +44,22 @@ It will be the core of ultimate-speed decentralised projects for the nearest fut
 <img src="img/AfterUs.png">
 </p>
 
-We created the infrastructure:
+We’ve created the infrastructure:
 
-* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/RBVM.cpp"> Register-Based VM</a>;
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/RBVM.cpp">a register-based VM, RBVM</a>;
 
-* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/tree/master/llvm-backend"> Translator from LLVM IR </a> (the most complex part of our solution);
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/tree/master/llvm-backend">a translator from LLVM IR </a> (the most complex part of our solution);
 
-* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/disassembler.cpp">Disassembler</a>;
+* <a href="https://gitlab.com/bibloman/serial_hacking_fantom_rbvm/blob/master/vm/disassembler.cpp">a disassembler</a>;
 
 to empower every developer in the world to write smart contracts in **any** language they want.
-We think it is an excellent result for a single hackathon.
+We think this is an excellent result for a single hackathon.
 
-We covered all backend above into the User-Friendly interface:
+We’ve also created a backend that covers all the functionality implemented:
 * <a href="http://209.97.131.179/#contract.cpp">Smart Contract IDE: Demo</a>;
 
-
-
-All the code except web IDE is written in C++, we have also used `make` and Docker. We use Bash for automatisation and test runners. All the documentation you can find below and in Installing section.
+All the code except for the web IDE is written in C++; `make` is currently used for building and Docker for deployment.
+We used `bash` for automated tests. All the documentation you can find below and in the “Installation and Test Runners” section.
 
 ### Virtual Machine Specification
 
@@ -135,27 +134,23 @@ Each stack frame has its own set of 256 registers.
        | call6 <Reg> <Reg1> <Reg2> <Reg3> <Reg4> <Reg5> <Reg6>
        | call7 <Reg> <Reg1> <Reg2> <Reg3> <Reg4> <Reg5> <Reg6> <Reg7>
        | call8 <Reg> <Reg1> <Reg2> <Reg3> <Reg4> <Reg5> <Reg6> <Reg7> <Reg8>
-
-call<N> functions put the return value into the function register (<Reg>).
-
-Instructions that may take either a register or constant operand (<Val>) are encoded as follows:
-   <instruction byte> <byte with value 0> <Reg>
-or
-   <instruction byte> <byte with value 1> <Constant:u64>
 ```
+
+`call<N>` functions put the return value into the function register (`<Reg>`).
+
+Instructions that may take either a register or constant operand (`<Val>`) are encoded as follows:
+either `<instruction byte> <byte with value 0> <Reg>` or `<instruction byte> <byte with value 1> <Constant:u64>`.
 
 # Fantom Smart Contract IDE
 
-We have created a very simple, comfortable and User-friendly interface for developers.
+We’ve created a simple, enjoyable and user-friendly interface for developers.
 <p align="center">
     <img  src="img/SmartContractIDE.png">
 </p>
 
-We provide examples in this web backend, which allow develop, compile, test, and deploy smart contracts to the Register-Based Virtual Machine: <a href="http://209.97.131.179/#contract.cpp"> See Live Demo.</a>
+We provide examples via this web backend. It allows developing, compiling, testing, and deploying smart contracts using our virtual machine: <a href="http://209.97.131.179/#contract.cpp">see live demo.</a>
 
-
-
-All the progress can be seen here as the examples of supported functionality, in the chronological order of creation:
+See the examples of supported functionality here, in the chronological order of creation:
 
 * <a href="http://209.97.131.179/#helloworld.c"> Arrays and Strings;</a>
 * <a href="http://209.97.131.179/#eratosthenes_sieve.c"> Loops and Conditions;</a>
@@ -167,10 +162,9 @@ All the progress can be seen here as the examples of supported functionality, in
 * <a href="http://209.97.131.179/#bubble_sort.cpp"> Static Polymorphism;</a>
 * <a href="http://209.97.131.179/#contract.cpp"> Analog of ERC20 Token.</a>
 
-We’ve created the entire infrastructure for LLVM IR translation and now it is able to translate the subset of LLVM IR needed for C and C++.
+We’ve created the entire infrastructure for LLVM IR translation and now it is able to translate a subset of LLVM IR needed for fairly large subset of C, and some of C++.
 
-But LLVM IR is quite a huge project and it was not possible to add support for all the instructions during only one hackathon, so, support of Rust, Python, Go and others is coming soon.
-
+Nevertheless, LLVM IR is quite a huge project and it was not possible to add support for all the instructions during only one hackathon; so, the support for Rust, Python, Go and others is coming soon.
 
 # Installation and Test Runners
 ### [1. Start Smart Contract IDE Using Docker](#start-smart-contract-ide-using-docker)
@@ -203,7 +197,7 @@ git clone https://gitlab.com/bibloman/serial_hacking_fantom_rbvm
 cd serial_hacking_fantom_rbvm
 ```
 
-#### Step 2: Install LLVM 6 or 7.
+#### Step 2: Install LLVM 6 or 7
 In Debian or Ubuntu, this can be achieved by the following expedient:
 ```
 apt-get install llvm-7 llvm-7-dev llvm-7-runtime
@@ -218,16 +212,33 @@ brew install llvm@7
 make
 ```
 
-### Step 4: Run tests.
+### Step 4: Run automated tests
 ```
 make check
 ```
 After that, you can find files LLVM IR files in `./*.ll` and the byte code for our VM in `./*.rbvm`.
 
-#### Step 5: Run a particular test.
+#### Optional step: Run a particular test.
 ```
 ./compile-and-run examples/helloworld.c
 ```
+
+#### Optional step: compile, translate and run a C/C++ file manually
+
+```
+# Generate LLVM IR (program.ll); use clang++ for C++ source
+clang -S -emit-llvm program.c
+# Translate into RBVM bytecode (program.rbvm)
+./llvm-backend/llvm-rbvm program.ll
+# Run
+./vm/vm program.rbvm
+```
+
+#### Optional step: disassemble a .rbvm file
+````
+./vm/da program.rbvm
+````
+
 # Surprise
 During this hackathon we have gone through a huge amount of information and what's interesting, we have found that the first task "Solidity to LLVM IR" is already solved by the official ethereum developers.
 
