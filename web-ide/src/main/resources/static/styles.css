@@ -290,3 +290,12 @@ body {
     padding: 2px;
     margin: 0;
 }
+
+div.nupresentation-tab {
+    height: 460px;
+}
+div.nupresentation-tab img {
+    height: 100%;
+    display: block;
+    margin: auto;
+}
