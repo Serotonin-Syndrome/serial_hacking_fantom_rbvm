@@ -255,5 +255,5 @@ During this hackathon:
 
 # Team
 <p align="center">
-<img  src="img/Team.png">
+<img  src="img/TeamNew.png">
 </p>
