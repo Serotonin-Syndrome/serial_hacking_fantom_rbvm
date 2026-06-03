@@ -6,18 +6,19 @@
 # Structure
 
 <ol type="1" style="font-size: x-large;">
-<li> [About](#about)
-<li> [Fantom RBVM Task](#fantom-rbvm-task)
-<li> [Solution](#solution)
-<ol type="a" style="font-size: large;">
-  <li> [Translator from LLVM IR to RBVM](#solution)
-  <li> [Fantom Smart Contract IDE](#fantom-smart-contract-ide)
-  <li> [Virtual Machine Specification](#virtual-machine-specification)
-  <li> [Installation and Test Runners](#installation-and-test-runners)
-</ol>
-<li> [Surprise](#surprise)
-<li> [Finally](#finally)
-<li> [Team](#team)
+  <li><a href="#about">About</a></li>
+  <li><a href="#fantom-rbvm-task">Fantom RBVM Task</a></li>
+  <li><a href="#solution">Solution</a>
+    <ol type="a" style="font-size: large;">
+      <li><a href="#solution">Translator from LLVM IR to RBVM</a></li>
+      <li><a href="#fantom-smart-contract-ide">Fantom Smart Contract IDE</a></li>
+      <li><a href="#virtual-machine-specification">Virtual Machine Specification</a></li>
+      <li><a href="#installation-and-test-runners">Installation and Test Runners</a></li>
+    </ol>
+  </li>
+  <li><a href="#surprise">Surprise</a></li>
+  <li><a href="#finally">Finally</a></li>
+  <li><a href="#team">Team</a></li>
 </ol>
 
 # About
